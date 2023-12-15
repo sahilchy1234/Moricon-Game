@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8466007182308143104
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8466007182308143107}
+  - component: {fileID: 8466007182308143106}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8466007182308143107
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8466007182308143104}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8466007182308143106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8466007182308143104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6cc1db541e6f624f90efe4c5ae9f55e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: 
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 0.64
+    loop: 0
+    source: {fileID: 0}
+  - name: fire
+    clip: {fileID: 8300000, guid: 8f287b7604b6b2545bc3257a25f6ae9e, type: 3}
+    volume: 1
+    pitch: 0.98
+    loop: 0
+    source: {fileID: 0}
+  - name: reload
+    clip: {fileID: 8300000, guid: 8ad4c7d2b016e494a965c399e4b2ad0f, type: 3}
+    volume: 1
+    pitch: 0.97
+    loop: 0
+    source: {fileID: 0}
+  - name: break
+    clip: {fileID: 8300000, guid: 452941c096521a2409c43280d88ebd86, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: metal
+    clip: {fileID: 8300000, guid: 32ebfc71add72684d9c956579fabea37, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}

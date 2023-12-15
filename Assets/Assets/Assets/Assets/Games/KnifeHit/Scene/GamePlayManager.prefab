@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4676334041033780534
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4676334041033780680}
+  - component: {fileID: 4676334041033780681}
+  m_Layer: 0
+  m_Name: GamePlayManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &4676334041033780680
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4676334041033780534}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -3.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4676334041033780681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4676334041033780534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9f05c2ef1a21da47aa27446564b4a9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  circlePrefabs:
+  - {fileID: 114667996635612362, guid: f6502f0fc98ee4543a13a8170ae1c2a8, type: 3}
+  - {fileID: 114667996635612362, guid: e66d489dc750d0444b916f7206c7ba38, type: 3}
+  - {fileID: 114667996635612362, guid: 676e042964d6e46439bbb69a4337a507, type: 3}
+  - {fileID: 114667996635612362, guid: 0b9ef63f00cdd0645bbb3edabc8fc409, type: 3}
+  - {fileID: 114667996635612362, guid: 0298fc85a6fbdd54aaccaee715620a15, type: 3}
+  - {fileID: 114667996635612362, guid: 919a1cd1e4cd6f14fa97b13a6c74078f, type: 3}
+  - {fileID: 114667996635612362, guid: ef54a0b2086564540827a51a48c8499a, type: 3}
+  BossPrefabs:
+  - Bossname: BossLidRealBoss
+    BossPrefab: {fileID: 114667996635612362, guid: f3a7ebe2213e26e40aa6be497451fdda, type: 3}
+  - Bossname: BossMeatRealBoss
+    BossPrefab: {fileID: 114667996635612362, guid: e66d489dc750d0444b916f7206c7ba38, type: 3}
+  - Bossname: BossOrange
+    BossPrefab: {fileID: 114667996635612362, guid: ef54a0b2086564540827a51a48c8499a, type: 3}
+  - Bossname: BossTire
+    BossPrefab: {fileID: 114667996635612362, guid: 8957b43337dbd8740a40df3b684973dd, type: 3}
+  - Bossname: BossWaterMelon
+    BossPrefab: {fileID: 114667996635612362, guid: 58d7a6056465bfb4dbfe09ac8c52a440, type: 3}
+  - Bossname: BossGround
+    BossPrefab: {fileID: 114667996635612362, guid: 8a07a27337f12124aa75d9bfd0fd81a6, type: 3}
+  circleSpawnPoint: {fileID: 0}
+  circleWidthByScreen: 0.55
+  timeText: {fileID: 0}
+  isGameOver: 0
+  knifePrefab: {fileID: 114628458869949704, guid: b447f14fede85b543827b2288523e029, type: 3}
+  knifePrefab1: {fileID: 114790341844265010, guid: 250b34708bc1dcd4fb742b10f542cc04, type: 3}
+  knifePrefab2: {fileID: 114870801287059610, guid: d92a8083cb94c8a479785628d611fee0, type: 3}
+  knifePrefab3: {fileID: 114063057784276800, guid: 0dbb15e9017590d4aa3686d67cea80c3, type: 3}
+  knifePrefab4: {fileID: 114244218658875746, guid: fafcf7070dfff024ebb52cb7757bee6b, type: 3}
+  knifePrefab5: {fileID: 114790341844265010, guid: 250b34708bc1dcd4fb742b10f542cc04, type: 3}
+  knifePrefab6: {fileID: 114511566512732804, guid: 076e7ff24d4b32b4a8f3b2d87bf9457e, type: 3}
+  knifePrefab7: {fileID: 114410954112893974, guid: 2f0472791599fd4458293f21ed6e8b77, type: 3}
+  knifePrefab8: {fileID: 114374439313522458, guid: 066ff06db05e0174d981e0ae709f443c, type: 3}
+  KnifeSpawnPoint: {fileID: 0}
+  knifeHeightByScreen: 0.15
+  ApplePrefab: {fileID: 1961861215635450, guid: 4b9c4ffc310d5df429e76712b91cdb28, type: 3}
+  lblScore: {fileID: 0}
+  lblStage: {fileID: 0}
+  stageIcons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  stageIconActiveColor: {r: 0.09019608, g: 0.5411765, b: 1, a: 1}
+  stageIconNormalColor: {r: 1, g: 1, b: 1, a: 1}
+  isplayingBossLevel: 0
+  bossFightStart: {fileID: 0}
+  bossFightEnd: {fileID: 0}
+  bossFightStartSounds:
+  - {fileID: 8300000, guid: c66ed6cf6aef0b84c857edef3bd1a2be, type: 3}
+  bossFightEndSounds:
+  - {fileID: 8300000, guid: 95d5839451845ec4aad2dc400582f648, type: 3}
+  cLevel: 4
+  isDebug: 0
+  currentCircle: {fileID: 0}
