@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Assets/Assets/Assets/Scenes/SPLASH.unity
     guid: 223c0974595be9b45b36f21a9420e9a4
   - enabled: 1

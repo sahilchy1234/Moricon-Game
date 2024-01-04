@@ -109,7 +109,7 @@ namespace Cashbaazi.App.Screen
             PhotonManager.OtherPlayerLeft += PhotonManager_OtherPlayerLeft;
 
             Txt_GameAmount.text = string.Format("Entry Fee :- <color=white>Rs.{0}", AppManager.instance.Get_BattleSettings().amount);
-            Txt_WinAmount.text = string.Format("Win Prize :- <color=white>Rs.{0}", AppManager.instance.Get_GameWinningAmount());
+            Txt_WinAmount.text = string.Format(AppManager.instance.Get_GameWinningAmount().ToString());
 
             base.Show();
             commonScreen.currentScreen = this;

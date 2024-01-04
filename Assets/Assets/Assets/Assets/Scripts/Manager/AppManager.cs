@@ -29,6 +29,16 @@ namespace Cashbaazi.App.Manager
         {
             return int.Parse(ApiManager.instance.responce_userdata.avtar);
         }
+
+        public float Get_EntryAmount()
+        {
+            return battleSetting.amount;
+        }
+
+          public float Get_maxPlayers()
+        {
+            return battleSetting.maxPlayers;
+        }
         public float Get_GameWinningAmount()
         {
             float winningAmount = 0;
@@ -38,7 +48,7 @@ namespace Cashbaazi.App.Manager
                 {
                     case 2:
                         winningAmount = 3f;
-                        break;                   
+                        break;
                     case 5:
                         winningAmount = 8f;
                         break;

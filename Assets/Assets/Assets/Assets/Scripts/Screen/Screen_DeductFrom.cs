@@ -12,6 +12,8 @@ namespace Cashbaazi.App.Screen
 {
     public class Screen_DeductFrom : ISCREEN
     {
+        public Toggle[] tog;
+        public Button mainBtn;
         [Space]
         [SerializeField] TextMeshProUGUI txt_deposit;
         [SerializeField] TextMeshProUGUI txt_winning;
@@ -34,28 +36,54 @@ namespace Cashbaazi.App.Screen
 
         public override void Show()
         {
-            txt_deposit.text = String.Format("Deposit wallet - Rs.{0}", ApiManager.instance.responce_userdata.MainWallet);
-            txt_winning.text = String.Format("Winning wallet - Rs.{0}", ApiManager.instance.responce_userdata.WinningWallet);
+            txt_deposit.text = String.Format(ApiManager.instance.responce_userdata.MainWallet.ToString());
+            txt_winning.text = String.Format(ApiManager.instance.responce_userdata.WinningWallet.ToString());
 
             base.Show();
         }
 
         private void Update()
         {
-         
+            if (tog[0].isOn || tog[1].isOn)
+            {
+                mainBtn.interactable = true;
+
+            }
+            else
+            {
+                mainBtn.interactable = false;
+            }
+
         }
+
+        public void mainButtonFunction()
+        {
+            if (tog[0].isOn)
+            {
+                OnClick_Deposit();
+            }
+            else
+            {
+                if (tog[1].isOn)
+                {
+                    OnClick_Winning();
+                }
+            }
+        }
+
+
         private void OnClick_Deposit()
         {
             if (AppManager.instance.Get_BattleSettings().amount > ApiManager.instance.responce_userdata.MainWallet)
             {
-              Toast.ShowToast("You don't have enough balance in deposit!");
-               return;
-           }
+                Toast.ShowToast("You don't have enough balance in playable!");
+                return;
+            }
 
             //  AppManager.instance.Set_DeductFrom();
             //  commonScreen.WalletUpdate();
-              ScreenManager.instance.SwitchScreen(SCREEN_TYPE.CONNECTING, commonScreen.currentScreen.screenType);
-            
+            ScreenManager.instance.SwitchScreen(SCREEN_TYPE.CONNECTING, commonScreen.currentScreen.screenType);
+
 
         }
 
@@ -63,12 +91,12 @@ namespace Cashbaazi.App.Screen
         {
             if (AppManager.instance.Get_BattleSettings().amount > ApiManager.instance.responce_userdata.WinningWallet)
             {
-                Toast.ShowToast("You don't have enough balance in winnings!");
-               return;
+                Toast.ShowToast("You don't have enough balance in redeemable!");
+                return;
             }
             //  AppManager.instance.Set_DeductFrom();
-             ScreenManager.instance.SwitchScreen(SCREEN_TYPE.CONNECTING_WINNING, commonScreen.currentScreen.screenType);
-            
+            ScreenManager.instance.SwitchScreen(SCREEN_TYPE.CONNECTING_WINNING, commonScreen.currentScreen.screenType);
+
 
         }
         private void OnClick_Back()

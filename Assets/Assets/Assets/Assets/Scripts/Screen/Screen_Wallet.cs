@@ -19,6 +19,7 @@ namespace Cashbaazi.App.Screen
         [SerializeField] Button Btn_VerifyReferral;
         [SerializeField] Button Btn_Withdraw;
         [SerializeField] Button Btn_TransactionHistory;
+         [SerializeField] Button Btn_Offers;
         [SerializeField] Button Btn_Warning;
         [SerializeField] Button Btn_WinningInfoWarning;
         [SerializeField] Text Txt_DepositCash;
@@ -37,6 +38,7 @@ namespace Cashbaazi.App.Screen
             Btn_VerifyReferral.onClick.AddListener(OnClick_VerifyRefral);
             Btn_Withdraw.onClick.AddListener(OnClick_Withdraw);
             Btn_TransactionHistory.onClick.AddListener(OnClick_TransactionHistory);
+            Btn_Offers.onClick.AddListener(OnClick_OfferScreen);
             Btn_Warning.onClick.AddListener(OnClick_Warning);
             Btn_WinningInfoWarning.onClick.AddListener(OnClick_WinningInfoWarning);
         }
@@ -93,6 +95,11 @@ namespace Cashbaazi.App.Screen
         private void OnClick_TransactionHistory()
         {
             ScreenManager.instance.SwitchScreen(SCREEN_TYPE.TRANSACTION_HISTORY);
+        }
+
+         private void OnClick_OfferScreen()
+        {
+            ScreenManager.instance.SwitchScreen(SCREEN_TYPE.OFFER);
         }
         private void OnClick_Warning()
         {

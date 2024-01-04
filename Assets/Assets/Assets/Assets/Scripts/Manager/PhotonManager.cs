@@ -49,7 +49,23 @@ namespace Cashbaazi.App.Common
         private void Start()
         {
             botPlayers = new List<BotPlayer>();
+            // InitializeChatManager();
+
+            ChatManager chatManager = FindObjectOfType<ChatManager>();
+            chatManager.InitializePubNub();
         }
+
+
+        void InitializeChatManager()
+        {
+            ChatManager chatManager = FindObjectOfType<ChatManager>();
+            chatManager.InitializePubNub();
+            if (chatManager != null)
+            {
+                chatManager.SubscribeToRoomChatChannel(PhotonNetwork.CurrentRoom.Name);
+            }
+        }
+
 
         public void ConnectToPhoton()
         {
@@ -91,6 +107,9 @@ namespace Cashbaazi.App.Common
         public override void OnJoinedLobby()
         {
             Debug.Log("Joined Lobby");
+
+
+
             JoinRandomRoom();
         }
         public override void OnJoinRandomFailed(short returnCode, string message)
@@ -106,6 +125,13 @@ namespace Cashbaazi.App.Common
         public override void OnJoinedRoom()
         {
             Debug.Log("Joined Room : " + PhotonNetwork.CurrentRoom.Name);
+
+            ChatManager chatManager = FindObjectOfType<ChatManager>();
+            if (chatManager != null)
+            {
+                Debug.Log("room name" + PhotonNetwork.CurrentRoom.Name);
+                chatManager.SubscribeToRoomChatChannel(PhotonNetwork.CurrentRoom.Name);
+            }
             if (JoinedRoom != null)
                 JoinedRoom();
         }

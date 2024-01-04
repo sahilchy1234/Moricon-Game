@@ -12,14 +12,14 @@ using Cashbaazi.App.Helper;
 using Cashbaazi.App.Manager;
 using UnityEngine.SceneManagement;
 
-
+using UnityEngine.Networking;
 namespace Cashbaazi.App.Screen
 {
     public class Screen_Gameover : ISCREEN
     {
         [Space(20)]
         // [SerializeField] TextMeshProUGUI Txt_BestScore;
-       
+
         [Space]
         [SerializeField] GameObject player1;
         [SerializeField] GameObject player2;
@@ -31,7 +31,7 @@ namespace Cashbaazi.App.Screen
 
         [Space]
         [SerializeField] PlayerGameover playerGameOver_prefab;
-       // [SerializeField] Transform playerGameOver_parent;
+        // [SerializeField] Transform playerGameOver_parent;
 
         [SerializeField] Button Btn_Menu;
         [SerializeField] Button ReportFraud;
@@ -39,10 +39,10 @@ namespace Cashbaazi.App.Screen
 
         [SerializeField] Screen_Report reportScreen;
         public static Screen_Gameover instance;
-       
+
         private void Start()
         {
-           
+
             Btn_Menu.onClick.AddListener(OnClick_Menu);
             ReportFraud.onClick.AddListener(OnClickReportBtn);
             //  Btn_PlayAgain.onClick.AddListener(OnClick_PlayAgain);
@@ -51,7 +51,7 @@ namespace Cashbaazi.App.Screen
 
         public override void Show()
         {
-            
+
             base.Show();
             for (int i = 0; i < allPlayers.Count; i++)
             {
@@ -67,7 +67,7 @@ namespace Cashbaazi.App.Screen
                         String.Format("<color=green>Rs.{0}</color>", AppManager.instance.Get_GameWinningAmount()) :
                         String.Format("<color=red>Rs.-{0}</color>", AppManager.instance.Get_BattleSettings().amount);
                     player1.transform.GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>().text = allPlayers[i].ThisPlayerScore.ToString();
-                   
+
                 }
                 else if (!player2.activeInHierarchy)
                 {
@@ -103,14 +103,186 @@ namespace Cashbaazi.App.Screen
             //Txt_BestScore.text = string.Format("<color=white>Winner's Score</color>\n<size=200>{0}</size>", allPlayers[0].ThisPlayerScore);
             UpdateWinnerWallet();
 
-            Timer.Schedule(this, 2f, () => 
+            Timer.Schedule(this, 2f, () =>
             {
                 PhotonManager.instance.DestroyBotPlayers();
             });
         }
 
-      public  void UpdateWinnerWallet()
+
+
+
+
+
+
+
+
+
+
+        public string currentIndianTime;
+        private const string worldTimeApiUrl = "http://worldtimeapi.org/api/timezone/Asia/Kolkata"; // India time zone
+
+        IEnumerator StartDataUploadingPlayfab()
         {
+            // Make a web request to the WorldTimeAPI
+            UnityWebRequest www = UnityWebRequest.Get(worldTimeApiUrl);
+            yield return www.SendWebRequest();
+
+            if (www.result == UnityWebRequest.Result.Success)
+            {
+                // Parse the JSON response
+                string jsonResponse = www.downloadHandler.text;
+                WorldTimeResponse worldTimeResponse = JsonUtility.FromJson<WorldTimeResponse>(jsonResponse);
+
+                // Get the current time from the response
+                System.DateTime currentTime = System.DateTime.Parse(worldTimeResponse.datetime);
+
+                // Print the time
+                Debug.Log("Current Time in India: " + currentTime.ToString());
+                currentIndianTime = currentTime.ToString();
+
+                DataStorePlayfab();
+
+            }
+            else
+            {
+                Debug.LogError("Error fetching Indian time: " + www.error);
+            }
+        }
+
+        [System.Serializable]
+        private class WorldTimeResponse
+        {
+            public string datetime;
+        }
+
+
+
+
+
+
+
+        string alldata;
+        public void DataStorePlayfab()
+        {
+            //For two players
+            if (AppManager.instance.Get_maxPlayers() == 2)
+            {
+
+                if (allPlayers[0].ThisPlayer.IsLocal)
+                {
+
+                    alldata = "\n" + " Game status : win, " + "Score:- " + allPlayers[0].ThisPlayerScore + " , " + "Entry Amount:- " + AppManager.instance.Get_EntryAmount().ToString() + ", " + "Opponent:- " + allPlayers[1].ThisPlayer.NickName + " Time:-" + currentIndianTime + " ; \n";
+                }
+                else
+                {
+
+
+
+                    if (allPlayers[1].ThisPlayer.IsLocal)
+                    {
+                        alldata = "\n" + " Game status : loss, " + "Score:- " + allPlayers[1].ThisPlayerScore + " , " + "Entry Amount:- " + AppManager.instance.Get_EntryAmount().ToString() + ", " + "Opponent:- " + allPlayers[0].ThisPlayer.NickName + " Time:-" + currentIndianTime + " ; \n";
+                    }
+
+                }
+            }
+            else
+            {
+
+
+                if (allPlayers[0].ThisPlayer.IsLocal)
+                {
+
+                    alldata = "\n" + " Game status : win, " + "Score:- " + allPlayers[0].ThisPlayerScore + " , " + "Entry Amount:- " + AppManager.instance.Get_EntryAmount().ToString() + ", " + "Opponents:- " + allPlayers[1].ThisPlayer.NickName + " " + allPlayers[2].ThisPlayer.NickName + " " + allPlayers[3].ThisPlayer.NickName + " Time:-" + currentIndianTime + " ; \n";
+                }
+                else
+                {
+
+
+
+                    if (allPlayers[1].ThisPlayer.IsLocal)
+                    {
+                        alldata = "\n" + " Game status : loss, " + "Score:- " + allPlayers[1].ThisPlayerScore + " , " + "Entry Amount:- " + AppManager.instance.Get_EntryAmount().ToString() + ", " + "Opponents:- " + allPlayers[0].ThisPlayer.NickName + " " + allPlayers[2].ThisPlayer.NickName + " " + allPlayers[3].ThisPlayer.NickName + " Time:-" + currentIndianTime + " ; \n";
+
+                    }
+                    else
+                    {
+                        if (allPlayers[2].ThisPlayer.IsLocal)
+                        {
+                            alldata = "\n" + " Game status : loss, " + "Score:- " + allPlayers[2].ThisPlayerScore + " , " + "Entry Amount:- " + AppManager.instance.Get_EntryAmount().ToString() + ", " + "Opponents:- " + allPlayers[0].ThisPlayer.NickName + " " + allPlayers[1].ThisPlayer.NickName + " " + allPlayers[3].ThisPlayer.NickName + " Time:-" + currentIndianTime + " ; \n";
+
+                        }
+                        else
+                        {
+                            if (allPlayers[3].ThisPlayer.IsLocal)
+                            {
+                                alldata = "\n" + " Game status : loss, " + "Score:- " + allPlayers[3].ThisPlayerScore + " , " + "Entry Amount:- " + AppManager.instance.Get_EntryAmount().ToString() + ", " + "Opponents:- " + allPlayers[0].ThisPlayer.NickName + " " + allPlayers[2].ThisPlayer.NickName + " " + allPlayers[1].ThisPlayer.NickName + " Time:-" + currentIndianTime + " ; \n";
+
+                            }
+                        }
+
+                    }
+
+                }
+
+            }
+
+
+
+
+
+            // if (allPlayers[2] != null)
+            // {
+            //     if (allPlayers[2].ThisPlayer.IsLocal)
+            //     {
+            //         alldata = "; loss, " + allPlayers[2].ThisPlayerScore + " , " + AppManager.instance.Get_EntryAmount().ToString();
+            //     }
+            // }
+            // else
+            // {
+
+
+
+            //     if (allPlayers[3] != null)
+            //     {
+            //         if (allPlayers[3].ThisPlayer.IsLocal)
+            //         {
+            //             alldata = "; loss, " + allPlayers[3].ThisPlayerScore + " , " + AppManager.instance.Get_EntryAmount().ToString();
+            //         }
+            //     }
+            // }
+
+            Scene scene = SceneManager.GetActiveScene();
+
+            if (scene.name == "GunsBottleGame")
+            {
+                PlayfabManager.instance.BottleGameSaveFunction(alldata);
+            }
+            if (scene.name == "KnifeHit")
+            {
+                PlayfabManager.instance.KnifeHitFunction(alldata);
+            }
+            if (scene.name == "DunkBall")
+            {
+                PlayfabManager.instance.DunkSaveFunction(alldata);
+            }
+            if (scene.name == "FruitNinja")
+            {
+                PlayfabManager.instance.FruitNijaSaveFunction(alldata);
+            }
+
+            Debug.Log(alldata);
+        }
+
+
+
+
+        public void UpdateWinnerWallet()
+        {
+
+            StartCoroutine("StartDataUploadingPlayfab");
+
+
             if (allPlayers[0].ThisPlayer.IsLocal)
             {
                 ApiManager.instance.API_AddWallet("Game Winning Amount", AppManager.instance.Get_GameWinningAmount(),
@@ -129,28 +301,28 @@ namespace Cashbaazi.App.Screen
         public void AssignAllPlayers(List<PlayerGame> _players)
         {
             allPlayers = _players;
-           
+
         }
         public void CalculateRank()
-        { 
+        {
             allPlayers = allPlayers.OrderByDescending(x => x.ThisPlayerScore).ToList();
         }
 
-        
+
         public void OnClick_Menu()
         {
             PhotonNetwork.Disconnect();
             ScreenManager.instance.SwitchScreen(SCREEN_TYPE.MENU, this.screenType);
-          //  Loading.instance.ShowLoading();
-           
+            //  Loading.instance.ShowLoading();
+
             Debug.Log("");
         }
 
         public void OnClickReportBtn()
         {
-            ScreenManager.instance.SwitchScreen(SCREEN_TYPE.REPORT,this.screenType);
+            ScreenManager.instance.SwitchScreen(SCREEN_TYPE.REPORT, this.screenType);
             Debug.Log("Report Page");
         }
-        
+
     }
 }

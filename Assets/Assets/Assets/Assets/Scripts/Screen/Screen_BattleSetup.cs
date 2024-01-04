@@ -21,7 +21,7 @@ namespace Cashbaazi.App.Screen
         {
             obj_SelectAmount.SetActive(true);
             obj_SelectPlayerOptions.SetActive(false);
-           
+
 
             base.Show();
             commonScreen.currentScreen = this;
@@ -39,12 +39,13 @@ namespace Cashbaazi.App.Screen
             AppManager.instance.Get_BattleAmount(_amount);
             obj_SelectAmount.SetActive(false);
             obj_SelectPlayerOptions.SetActive(true);
+            ScreenManager.instance.SwitchScreen(SCREEN_TYPE.DEDUCT_BALANCE_FROM);
         }
         public void Set_BattleMaxPlayers(int _maxPlayers)
         {
             AppManager.instance.Set_BattleMaxPlayer(_maxPlayers);
-             ScreenManager.instance.SwitchScreen(SCREEN_TYPE.DEDUCT_BALANCE_FROM);
-            
+            //  ScreenManager.instance.SwitchScreen(SCREEN_TYPE.DEDUCT_BALANCE_FROM);
+
         }
 
         public void OnClickPraticeGame(int _maxPlayers)

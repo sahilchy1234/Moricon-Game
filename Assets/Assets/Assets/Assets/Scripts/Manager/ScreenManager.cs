@@ -84,7 +84,7 @@ namespace Cashbaazi.App.Common
         //  ISCREEN previousShowing = GetScreen(screensStack.ToArray()[1]);
          // screensStack.Pop();
             currentShowing.Hide();
-            SceneManager.LoadScene("MENU");    
+            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("MENU");
             // SwitchScreen(SCREEN_TYPE.COMMON);
            // Timer.Schedule(this, Core.Screen_FadeTime, () => previousShowing.Show());
         }

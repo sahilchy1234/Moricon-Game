@@ -577,7 +577,7 @@ namespace Cashbaazi.App.Helper
         }
         IEnumerator Call_GetOfferList(Action success = null, Action failure = null)
         {
-            Loading.instance.ShowLoading();
+            loadingCustom.instance.ShowLoading();
 
             using (UnityWebRequest request = UnityWebRequest.PostWwwForm(URL_OfferList, string.Empty))
             {
@@ -588,7 +588,7 @@ namespace Cashbaazi.App.Helper
                 while (!request.isDone)
                     yield return null;
 
-                Loading.instance.HideLoading();
+                loadingCustom.instance.HideLoading();
 
                 switch (request.result)
                 {
@@ -627,7 +627,7 @@ namespace Cashbaazi.App.Helper
         }
         IEnumerator Call_GetUsedOfferList(Action success = null, Action failure = null)
         {
-            Loading.instance.ShowLoading();
+            loadingCustom.instance.ShowLoading();
 
             using (UnityWebRequest request = UnityWebRequest.PostWwwForm(URL_UsedOfferList, string.Empty))
             {
@@ -638,7 +638,7 @@ namespace Cashbaazi.App.Helper
                 while (!request.isDone)
                     yield return null;
 
-                Loading.instance.HideLoading();
+                loadingCustom.instance.HideLoading();
 
                 switch (request.result)
                 {
