@@ -12,11 +12,22 @@ using Cashbaazi.App.Helper;
 using Cashbaazi.App.Manager;
 using UnityEngine.SceneManagement;
 
+using PlayFab;
+using PlayFab.ClientModels;
+
+
 using UnityEngine.Networking;
 namespace Cashbaazi.App.Screen
 {
     public class Screen_Gameover : ISCREEN
     {
+
+
+
+ private List<string> friendNames = new List<string>();
+        public GameObject[] fourButtons;
+
+
         [Space(20)]
         // [SerializeField] TextMeshProUGUI Txt_BestScore;
 
@@ -45,7 +56,72 @@ namespace Cashbaazi.App.Screen
 
             Btn_Menu.onClick.AddListener(OnClick_Menu);
             ReportFraud.onClick.AddListener(OnClickReportBtn);
+
+
+             InvokeRepeating("GetFriendList", 1f, 3f);
             //  Btn_PlayAgain.onClick.AddListener(OnClick_PlayAgain);
+        }
+
+
+        // private string friendPlayFabId = "";
+
+
+
+
+
+
+
+
+
+       
+
+    
+
+        private void GetFriendList()
+        {
+            // Set up the request to get the user's friend list
+       
+        // Set up the request to get the user's friend list
+        var request = new GetFriendsListRequest
+        {
+            
+            XboxToken = null
+        };
+
+        // Call the PlayFab API to get the friend list
+        PlayFabClientAPI.GetFriendsList(request, OnGetFriendsListSuccess, OnPlayFabError);
+
+
+            // Call the PlayFab API to get the friend list
+            // PlayFabClientAPI.GetFriendsList(request, OnGetFriendsListSuccess, OnPlayFabError);
+
+
+            for(int i = 0; i < friendNames.Count; i++) {
+                if(friendNames[i] ==  allPlayers[i].ThisPlayer.NickName){
+                    //   fourButtons[i].SetActive(false);
+                }
+            }
+        }
+
+        private void OnGetFriendsListSuccess(GetFriendsListResult result)
+        {
+            // Clear the list before populating it to avoid duplicates
+            friendNames.Clear();
+
+            // Populate the friendNames list with the names of friends
+            foreach (var friend in result.Friends)
+            {
+                friendNames.Add(friend.TitleDisplayName);
+            }
+
+            // Now friendNames contains the names of friends
+            // You can access the list as needed, for example, log it to the console
+            Debug.Log("Friend Names: " + string.Join(", ", friendNames.ToArray()));
+        }
+
+        private void OnPlayFabError(PlayFabError error)
+        {
+            Debug.LogError("PlayFab Error: " + error.ErrorMessage);
         }
 
 
@@ -55,11 +131,14 @@ namespace Cashbaazi.App.Screen
             base.Show();
             for (int i = 0; i < allPlayers.Count; i++)
             {
+
+
                 //PlayerGameover player = Instantiate(playerGameOver_prefab, playerGameOver_parent);
                 //player.SetPlayer(allPlayers[i].ThisPlayer, allPlayers[i].ThisPlayerScore, i + 1);
 
                 if (!player1.activeInHierarchy)
                 {
+
                     player1.SetActive(true);
                     player1.GetComponent<Image>().sprite = AvatarManager.instance.Get_AvatarSprite(allPlayers[i].ThisPlayer.GetPlayer_AvatarIndex());
                     player1.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = allPlayers[i].ThisPlayer.NickName;
@@ -68,9 +147,16 @@ namespace Cashbaazi.App.Screen
                         String.Format("<color=red>Rs.-{0}</color>", AppManager.instance.Get_BattleSettings().amount);
                     player1.transform.GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>().text = allPlayers[i].ThisPlayerScore.ToString();
 
+
+              
+
                 }
                 else if (!player2.activeInHierarchy)
                 {
+
+
+
+
                     player2.SetActive(true);
                     player2.GetComponent<Image>().sprite = AvatarManager.instance.Get_AvatarSprite(allPlayers[i].ThisPlayer.GetPlayer_AvatarIndex());
                     player2.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = allPlayers[i].ThisPlayer.NickName;
@@ -78,9 +164,17 @@ namespace Cashbaazi.App.Screen
                         String.Format("<color=green>Rs.{0}</color>", AppManager.instance.Get_GameWinningAmount()) :
                         String.Format("<color=red>Rs.-{0}</color>", AppManager.instance.Get_BattleSettings().amount);
                     player2.transform.GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>().text = allPlayers[i].ThisPlayerScore.ToString();
+
+
+
+
+
                 }
                 else if (!player3.activeInHierarchy)
                 {
+
+
+
                     player3.SetActive(true);
                     player3.GetComponent<Image>().sprite = AvatarManager.instance.Get_AvatarSprite(allPlayers[i].ThisPlayer.GetPlayer_AvatarIndex());
                     player3.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = allPlayers[i].ThisPlayer.NickName;
@@ -88,9 +182,26 @@ namespace Cashbaazi.App.Screen
                         String.Format("<color=green>Rs.{0}</color>", AppManager.instance.Get_GameWinningAmount()) :
                         String.Format("<color=red>Rs.-{0}</color>", AppManager.instance.Get_BattleSettings().amount);
                     player3.transform.GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>().text = allPlayers[i].ThisPlayerScore.ToString();
+
+
+
+
+
+
+
+
+
                 }
                 else if (!player4.activeInHierarchy)
                 {
+
+
+
+
+
+
+
+
                     player4.SetActive(true);
                     player4.GetComponent<Image>().sprite = AvatarManager.instance.Get_AvatarSprite(allPlayers[i].ThisPlayer.GetPlayer_AvatarIndex());
                     player4.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = allPlayers[i].ThisPlayer.NickName;
@@ -98,6 +209,12 @@ namespace Cashbaazi.App.Screen
                         String.Format("<color=green>Rs.{0}</color>", AppManager.instance.Get_GameWinningAmount()) :
                         String.Format("<color=red>Rs.-{0}</color>", AppManager.instance.Get_BattleSettings().amount);
                     player4.transform.GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>().text = allPlayers[i].ThisPlayerScore.ToString();
+
+
+
+
+
+
                 }
             }
             //Txt_BestScore.text = string.Format("<color=white>Winner's Score</color>\n<size=200>{0}</size>", allPlayers[0].ThisPlayerScore);

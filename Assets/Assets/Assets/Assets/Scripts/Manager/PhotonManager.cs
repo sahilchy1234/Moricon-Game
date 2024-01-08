@@ -51,8 +51,7 @@ namespace Cashbaazi.App.Common
             botPlayers = new List<BotPlayer>();
             // InitializeChatManager();
 
-            ChatManager chatManager = FindObjectOfType<ChatManager>();
-            chatManager.InitializePubNub();
+
         }
 
 
@@ -76,24 +75,75 @@ namespace Cashbaazi.App.Common
         {
             PhotonNetwork.Disconnect();
         }
+
+        public string privateRoomNameToJoin;
         public void JoinRandomRoom()
         {
-            botPlayers.Clear();
-            Hashtable hs = new Hashtable();
-            hs.Add("gametype", AppManager.instance.Get_BattleSettings().gameType.ToString());
-            hs.Add("amount", AppManager.instance.Get_BattleSettings().amount);
 
-            string[] propertyForLobby = new string[] { "gametype", "amount" };
+            if (specificChat.instance.isRequestedFromPrivateRoom)
+            {
+                PhotonNetwork.JoinRoom(privateRoomNameToJoin);
+            }
 
-            RoomOptions rops = new RoomOptions();
-            rops.MaxPlayers = (byte)AppManager.instance.Get_BattleSettings().maxPlayers;
-            rops.CustomRoomProperties = hs;
-            rops.CustomRoomPropertiesForLobby = propertyForLobby;
 
-            PhotonNetwork.JoinRandomOrCreateRoom(hs, (byte)AppManager.instance.Get_BattleSettings().maxPlayers, MatchmakingMode.FillRoom,
-                null, null, null, rops);
+            return;
+
+
+            if (!specificChat.instance.isPrivateRoomNeed)
+            {
+                botPlayers.Clear();
+                Hashtable hs = new Hashtable();
+                hs.Add("gametype", AppManager.instance.Get_BattleSettings().gameType.ToString());
+                hs.Add("amount", AppManager.instance.Get_BattleSettings().amount);
+
+                string[] propertyForLobby = new string[] { "gametype", "amount" };
+
+                RoomOptions rops = new RoomOptions();
+                rops.MaxPlayers = (byte)AppManager.instance.Get_BattleSettings().maxPlayers;
+                rops.CustomRoomProperties = hs;
+                rops.CustomRoomPropertiesForLobby = propertyForLobby;
+
+                PhotonNetwork.JoinRandomOrCreateRoom(hs, (byte)AppManager.instance.Get_BattleSettings().maxPlayers, MatchmakingMode.FillRoom,
+                    null, null, null, rops);
+            }
+            else
+            {
+                CreatePrivateRoom();
+            }
         }
 
+
+
+        public void CreatePrivateRoom()
+        {
+            botPlayers.Clear();
+
+            // Set custom room properties
+            Hashtable roomProperties = new Hashtable();
+            roomProperties.Add("gametype", AppManager.instance.Get_BattleSettings().gameType.ToString());
+            roomProperties.Add("amount", AppManager.instance.Get_BattleSettings().amount);
+
+            // Set custom room properties to be visible in the lobby
+            string[] propertyForLobby = new string[] { "gametype", "amount" };
+
+            // Create RoomOptions and set MaxPlayers and custom properties
+            RoomOptions roomOptions = new RoomOptions();
+            roomOptions.MaxPlayers = (byte)AppManager.instance.Get_BattleSettings().maxPlayers;
+            roomOptions.IsVisible = false;  // Set to false to make the room private
+            roomOptions.CustomRoomProperties = roomProperties;
+            roomOptions.CustomRoomPropertiesForLobby = propertyForLobby;
+
+
+            // Create a private room
+            PhotonNetwork.CreateRoom(AppManager.instance.Get_PlayerData().name, roomOptions, null);
+            specificChat.instance.messageInput.text = "battle_request_from " + "[" + AppManager.instance.Get_PlayerData().name + "]";
+            specificChat.instance.SendMessageToRoom("battle_request_from " + "["+ AppManager.instance.Get_PlayerData().name + "]");
+            specificChat.instance.SendMessageToRoom("battle_datas " + "[" + AppManager.instance.Get_BattleSettings().gameType + "]" + "{" + AppManager.instance.Get_BattleSettings().amount + "}" + "^" + AppManager.instance.Get_BattleSettings().maxPlayers + "*" + "!" + AppManager.instance.Get_BattleSettings().deductionWallet + "@");
+             
+
+             Debug.Log("battle_datas " + "[" + AppManager.instance.Get_BattleSettings().gameType + "]" + "{" + AppManager.instance.Get_BattleSettings().amount + "}" + "^" + AppManager.instance.Get_BattleSettings().maxPlayers + "*" + "!" + AppManager.instance.Get_BattleSettings().deductionWallet + "@");
+      
+        }
 
 
         #region Monocallbacks

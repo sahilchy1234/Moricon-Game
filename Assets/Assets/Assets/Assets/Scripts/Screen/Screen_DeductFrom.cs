@@ -95,7 +95,7 @@ namespace Cashbaazi.App.Screen
                 return;
             }
             //  AppManager.instance.Set_DeductFrom();
-            ScreenManager.instance.SwitchScreen(SCREEN_TYPE.CONNECTING_WINNING, commonScreen.currentScreen.screenType);
+            // ScreenManager.instance.SwitchScreen(SCREEN_TYPE.CONNECTING_WINNING, commonScreen.currentScreen.screenType);
 
 
         }

@@ -9,7 +9,7 @@ namespace Cashbaazi.App.Manager
     public class AppManager : Singleton<AppManager>
     {
         [Space(20)]
-        [SerializeField] BATTLE_SETTINGS battleSetting;
+        [SerializeField]public BATTLE_SETTINGS battleSetting;
 
 
         #region Public Values Methods

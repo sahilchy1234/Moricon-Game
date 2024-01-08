@@ -9,26 +9,40 @@ namespace Cashbaazi.App.Common
     public class ScreenManager : Singleton<ScreenManager>
     {
         [SerializeField] ISCREEN[] allScreens;
-        
+
         [Space]
         [SerializeField] SCREEN_TYPE firstScreen;
         [SerializeField] Stack<SCREEN_TYPE> screensStack;
 
         public ISCREEN currentScreen;
         int click = 0;
-       // [SerializeField] GameObject exitScreen;
+        // [SerializeField] GameObject exitScreen;
+
+
+        public void SendRequestFriendship(int i)
+        {
+            ChatManager.instance.SendFriendRequest(i);
+        }
+
         private void Start()
         {
-            
+               Scene scene = SceneManager.GetActiveScene();
+
+        // Check if the name of the current Active Scene is your first Scene.
+        if (scene.name == "MENU")
+        {
+
+              ChatManager.instance.InitializePubNub();
+        }
             screensStack = new Stack<SCREEN_TYPE>();
-            SwitchScreen(firstScreen);   
+            SwitchScreen(firstScreen);
         }
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-               click++;
-                ShowBackScreen();               
+                click++;
+                ShowBackScreen();
             }
             //else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("MENU"))
             //{
@@ -54,7 +68,7 @@ namespace Cashbaazi.App.Common
             if (tohide != null)
             {
                 tohide.Hide();
-                Timer.Schedule(this, Core.Screen_FadeTime, () => 
+                Timer.Schedule(this, Core.Screen_FadeTime, () =>
                 {
                     toshow.Show();
                 });
@@ -78,15 +92,15 @@ namespace Cashbaazi.App.Common
         }
         public void ShowBackScreen()
         {
-        //   if (screensStack.Count <= 1)
-        //    return;
-              ISCREEN currentShowing = GetScreen(screensStack.ToArray()[0]);
-        //  ISCREEN previousShowing = GetScreen(screensStack.ToArray()[1]);
-         // screensStack.Pop();
+            //   if (screensStack.Count <= 1)
+            //    return;
+            ISCREEN currentShowing = GetScreen(screensStack.ToArray()[0]);
+            //  ISCREEN previousShowing = GetScreen(screensStack.ToArray()[1]);
+            // screensStack.Pop();
             currentShowing.Hide();
             AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("MENU");
             // SwitchScreen(SCREEN_TYPE.COMMON);
-           // Timer.Schedule(this, Core.Screen_FadeTime, () => previousShowing.Show());
+            // Timer.Schedule(this, Core.Screen_FadeTime, () => previousShowing.Show());
         }
 
     }

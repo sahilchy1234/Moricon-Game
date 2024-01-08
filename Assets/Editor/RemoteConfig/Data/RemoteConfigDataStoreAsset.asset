@@ -12,96 +12,96 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469c24fdb3bd6431b92cc1465bd9166b, type: 3}
   m_Name: RemoteConfigDataStoreAsset
   m_EditorClassIdentifier: 
-  _rsKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"0417b589-39d7-4de6-996e-61760b46b6b6\"\r\n   
+  _rsKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"638138ed-7089-409c-bc57-d13906eaa7c3\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"bet1\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 2.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"a635344e-a341-4095-b9d5-a2a1a5a2889a\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"a016980e-1a92-4b85-b40a-d079f4285140\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"bet2\",\r\n      \"type\": \"float\",\r\n      \"value\": 5.0\r\n   
-    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"b6eff2d7-5101-4fd3-8410-4e0cab570a7d\"\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"79eaa26c-5a82-4f3c-8d6e-e66d8c4d9e31\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"bet3\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 8.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"9a1a1fce-ed89-4820-9e30-53931075f194\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"1aa6d054-4759-45bb-9667-87a64e645d7a\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"bet4\",\r\n      \"type\": \"float\",\r\n      \"value\": 10.0\r\n   
-    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"3bd3eb3c-5d89-4ef0-ac11-c2b38ed5ed48\"\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"b7c54a55-e5b1-4df9-ad24-dda86ff0876c\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"bet5\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 15.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"7126e50e-4268-4ed4-a411-63a5c5f0123e\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"d9c813b4-6668-4da9-9f59-8344f63a9992\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"bet6\",\r\n      \"type\": \"float\",\r\n      \"value\": 20.0\r\n   
-    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"361f414d-5619-4747-9eac-34b120bfd914\"\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"d7b77188-f843-4ae5-85e5-cfd03f90195c\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"bet7\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 25.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"83e9ec00-a40e-4ff5-9379-f301c8c2ec87\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"53a2a2f7-5409-45ab-881b-78ffb4651939\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"bet8\",\r\n      \"type\": \"float\",\r\n      \"value\": 50.0\r\n   
-    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"8cd74c9a-0301-45fe-98c4-11e10881c89d\"\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"e8dab63c-c8e8-47e8-9662-0c3bcf8d2cb0\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"bet9\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 100.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"6b4e1c1c-6ba0-46b1-9dc7-4995127b9fff\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"bc6dd70b-143e-428c-ac88-532eb4e33401\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"betReturn1\",\r\n      \"type\": \"float\",\r\n      \"value\": 3.0\r\n   
-    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"5d5fcadf-bb96-47ec-9c4b-e85e4eed8949\"\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"41358536-55dc-4484-97dd-b06dd426996d\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"betReturn2\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 8.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"1031a56d-1931-4a64-acb4-0d43c212bd68\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"902644dd-60cc-4d8f-827f-26db5ac973ca\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"betReturn3\",\r\n      \"type\": \"float\",\r\n      \"value\": 13.0\r\n   
-    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"f122ba19-f0aa-4db7-a101-cdc2a2526bae\"\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"f2a39f72-dc60-4585-91ed-8c476cf1e0f0\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"betReturn4\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 16.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"cee6299f-0ad4-40dc-a2f2-d20db15ce89b\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"92f7e283-6905-454b-9215-6a3210c2549d\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"betReturn5\",\r\n      \"type\": \"float\",\r\n      \"value\": 25.0\r\n   
-    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"d964d807-2981-48c2-84ee-f0ac2c69a75c\"\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"d1546e39-a552-462a-8ae6-f8156a995407\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"betReturn6\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 33.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"e3c7982c-c560-42aa-a1fd-a972fb0339dd\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"ddf6bce5-8f77-4b31-a450-9605a728288a\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"betReturn7\",\r\n      \"type\": \"float\",\r\n      \"value\": 40.0\r\n   
-    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"ac80ebc0-4e4f-4dfd-a59c-b59c65e4777d\"\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"8ab99e1c-39e8-427f-9b7c-62b777c4fda9\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"betReturn8\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 80.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"e09cbc1f-ddd3-4e6b-a640-738424c44109\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"6acdca86-93fa-4672-8b4f-f8355ecb8f1e\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"betReturn9\",\r\n      \"type\": \"float\",\r\n      \"value\": 160.0\r\n   
     }\r\n  }\r\n]"
-  _rsLastCachedKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"0417b589-39d7-4de6-996e-61760b46b6b6\"\r\n   
+  _rsLastCachedKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"638138ed-7089-409c-bc57-d13906eaa7c3\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"bet1\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 2.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"a635344e-a341-4095-b9d5-a2a1a5a2889a\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"a016980e-1a92-4b85-b40a-d079f4285140\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"bet2\",\r\n      \"type\": \"float\",\r\n      \"value\": 5.0\r\n   
-    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"b6eff2d7-5101-4fd3-8410-4e0cab570a7d\"\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"79eaa26c-5a82-4f3c-8d6e-e66d8c4d9e31\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"bet3\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 8.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"9a1a1fce-ed89-4820-9e30-53931075f194\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"1aa6d054-4759-45bb-9667-87a64e645d7a\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"bet4\",\r\n      \"type\": \"float\",\r\n      \"value\": 10.0\r\n   
-    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"3bd3eb3c-5d89-4ef0-ac11-c2b38ed5ed48\"\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"b7c54a55-e5b1-4df9-ad24-dda86ff0876c\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"bet5\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 15.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"7126e50e-4268-4ed4-a411-63a5c5f0123e\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"d9c813b4-6668-4da9-9f59-8344f63a9992\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"bet6\",\r\n      \"type\": \"float\",\r\n      \"value\": 20.0\r\n   
-    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"361f414d-5619-4747-9eac-34b120bfd914\"\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"d7b77188-f843-4ae5-85e5-cfd03f90195c\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"bet7\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 25.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"83e9ec00-a40e-4ff5-9379-f301c8c2ec87\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"53a2a2f7-5409-45ab-881b-78ffb4651939\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"bet8\",\r\n      \"type\": \"float\",\r\n      \"value\": 50.0\r\n   
-    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"8cd74c9a-0301-45fe-98c4-11e10881c89d\"\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"e8dab63c-c8e8-47e8-9662-0c3bcf8d2cb0\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"bet9\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 100.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"6b4e1c1c-6ba0-46b1-9dc7-4995127b9fff\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"bc6dd70b-143e-428c-ac88-532eb4e33401\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"betReturn1\",\r\n      \"type\": \"float\",\r\n      \"value\": 3.0\r\n   
-    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"5d5fcadf-bb96-47ec-9c4b-e85e4eed8949\"\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"41358536-55dc-4484-97dd-b06dd426996d\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"betReturn2\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 8.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"1031a56d-1931-4a64-acb4-0d43c212bd68\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"902644dd-60cc-4d8f-827f-26db5ac973ca\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"betReturn3\",\r\n      \"type\": \"float\",\r\n      \"value\": 13.0\r\n   
-    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"f122ba19-f0aa-4db7-a101-cdc2a2526bae\"\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"f2a39f72-dc60-4585-91ed-8c476cf1e0f0\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"betReturn4\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 16.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"cee6299f-0ad4-40dc-a2f2-d20db15ce89b\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"92f7e283-6905-454b-9215-6a3210c2549d\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"betReturn5\",\r\n      \"type\": \"float\",\r\n      \"value\": 25.0\r\n   
-    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"d964d807-2981-48c2-84ee-f0ac2c69a75c\"\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"d1546e39-a552-462a-8ae6-f8156a995407\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"betReturn6\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 33.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"e3c7982c-c560-42aa-a1fd-a972fb0339dd\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"ddf6bce5-8f77-4b31-a450-9605a728288a\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"betReturn7\",\r\n      \"type\": \"float\",\r\n      \"value\": 40.0\r\n   
-    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"ac80ebc0-4e4f-4dfd-a59c-b59c65e4777d\"\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"8ab99e1c-39e8-427f-9b7c-62b777c4fda9\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"betReturn8\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 80.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"e09cbc1f-ddd3-4e6b-a640-738424c44109\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"6acdca86-93fa-4672-8b4f-f8355ecb8f1e\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"betReturn9\",\r\n      \"type\": \"float\",\r\n      \"value\": 160.0\r\n   
     }\r\n  }\r\n]"
   _environments: "[\r\n  {\r\n    \"projectId\": \"ae7cecd2-5060-4305-b27a-50a44afd06fc\",\r\n   

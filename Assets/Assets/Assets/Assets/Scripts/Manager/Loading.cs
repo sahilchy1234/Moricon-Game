@@ -7,6 +7,18 @@ namespace Cashbaazi.App.Common
 {
     public class Loading : Singleton<Loading>
     {
+
+
+
+        void Start()
+        {
+            Invoke("disableLoadingScreen",1f);
+        }
+
+        void disableLoadingScreen(){
+            gameObject.SetActive(false);
+        }
+
         [SerializeField] GameObject panel;
 
         public void ShowLoading()

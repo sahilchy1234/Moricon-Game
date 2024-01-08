@@ -95,6 +95,7 @@ internal class UniWebViewAndroidManifest : UniWebViewAndroidXmlDocument {
         if (SelectNodes("/manifest/uses-permission[@android:name='android.permission.MICROPHONE']", nameSpaceManager).Count == 0) {
             var elem = CreateElement("uses-permission");
             elem.Attributes.Append(CreateAndroidAttribute("name", "android.permission.MICROPHONE"));
+                        elem.Attributes.Append(CreateAndroidAttribute("name", "android.permission.INTERNET"));
             ManifestElement.AppendChild(elem);
             changed = true;
         }

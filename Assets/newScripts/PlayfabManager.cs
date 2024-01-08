@@ -42,10 +42,29 @@ public class PlayfabManager : MonoBehaviour
 
         PlayFabClientAPI.LoginWithCustomID(request, OnSuccess, OnError);
 
+
+
+
+    }
+
+
+    void UpdateUserNameFunction()
+    {
+        var request1 = new UpdateUserTitleDisplayNameRequest
+        {
+            DisplayName = AppManager.instance.Get_PlayerData().name,
+        };
+        PlayFabClientAPI.UpdateUserTitleDisplayName(request1, OnNameUpdateSuccess, OnError);
+    }
+
+    void OnNameUpdateSuccess(UpdateUserTitleDisplayNameResult result)
+    {
+        Debug.Log("Name Update");
     }
 
     void OnSuccess(LoginResult result)
     {
+        UpdateUserNameFunction();
         Debug.Log("Login Successfull");
 
         Invoke("GetData", 2f);
