@@ -68,6 +68,22 @@ public class PlayfabManager : MonoBehaviour
         Debug.Log("Login Successfull");
 
         Invoke("GetData", 2f);
+
+        SaveData("AvatarIndex", (AppManager.instance.Get_PlayerAvatarIndex()).ToString());
+
+        FriendsManager.instance.LoadFriendsList();
+
+        SaveOnlineStatus(true);
+    }
+
+
+    private void OnApplicationFocus(bool focusStatus)
+    {
+        SaveOnlineStatus(false);
+    }
+    private void OnApplicationQuit()
+    {
+        SaveOnlineStatus(false);
     }
 
     void OnError(PlayFabError error)
@@ -75,6 +91,8 @@ public class PlayfabManager : MonoBehaviour
         Debug.Log("Error Login");
         Debug.Log(error.GenerateErrorReport());
     }
+
+
 
     public void SaveData(string game_name, string game_data)
     {
@@ -150,7 +168,18 @@ public class PlayfabManager : MonoBehaviour
         SaveData("FruitNijaGameData", maindata);
     }
 
-
+    public void SaveOnlineStatus(bool isOnline)
+    {
+        var request = new UpdateUserDataRequest
+        {
+            Data = new Dictionary<string, string>
+            {
+                { "LastOnline", DateTime.UtcNow.ToString() },
+                { "IsOnline", isOnline.ToString() } // Save the online status
+            }
+        };
+        PlayFabClientAPI.UpdateUserData(request, OnDataSend, OnError);
+    }
 
 
     void OnDataSend(UpdateUserDataResult result)

@@ -26,13 +26,13 @@ public class specificChat : MonoBehaviour
 
     public static specificChat instance;
     public GameObject chatObject;
-    public GameObject messagePrefab;
+    public GameObject messagePrefab, messagePrefabOpponent;
     public Transform contentPanel;
     public InputField messageInput;
     public ScrollRect scrollRect;
     public int maxMessages = 20;
 
-    private List<Text> messageTexts = new List<Text>();
+    private List<TMP_Text> messageTexts = new List<TMP_Text>();
     private PNConfiguration pnConfiguration;
     private Pubnub pubnub;
     private string channelPrefix = "room_chat_";
@@ -65,13 +65,23 @@ public class specificChat : MonoBehaviour
 
     public void SubscribeToRoomChatChannel(string initializerName)
     {
+
+        i = 0;
+        k = 0;
+
+        ClearChat();
+
+
         if (PlayerPrefs.HasKey(initializerName))
         {
             Debug.Log("subscribing to channel with  id" + channelPrefix + PlayerPrefs.GetString(initializerName));
             currentRoomChatChannel = channelPrefix + PlayerPrefs.GetString(initializerName);
+
             pubnub.Subscribe<string>()
                 .Channels(new string[] { currentRoomChatChannel })
                 .Execute();
+
+            RetrieveOldMessages(currentRoomChatChannel);
 
         }
     }
@@ -80,19 +90,55 @@ public class specificChat : MonoBehaviour
     {
         if (!message.Contains("friend_request_to"))
         {
-            GameObject newMessageObject = Instantiate(messagePrefab, contentPanel);
-            Text newMessageText = newMessageObject.GetComponent<Text>();
+
+
+            GameObject newMessageObject;
+
+            if (message.Contains(AppManager.instance.Get_PlayerData().name.ToString()))
+            {
+                newMessageObject = Instantiate(messagePrefab, contentPanel);
+            }
+            else
+            {
+                newMessageObject = Instantiate(messagePrefabOpponent, contentPanel);
+            }
+
+
+
+
+
+
+
+
+            string[] messageParts = message.Split(':');
+
+            // Check if the split was successful and get the sender name
+            // string senderName = (messageParts.Length > 0) ? messageParts[0].Trim() : "Unknown Sender";
+
+            // string senderInfo = senderName;
+
+            string messageContent = (messageParts.Length > 1) ? message.Substring(messageParts[0].Length + 1).Trim() : message;
+
+
+            message = messageContent;
+
+            TMP_Text newMessageText = newMessageObject.GetComponentInChildren<TMP_Text>();
             newMessageText.text = message;
             messageTexts.Add(newMessageText);
 
             if (messageTexts.Count > maxMessages)
             {
-                Text removedMessage = messageTexts[0];
+                TMP_Text removedMessage = messageTexts[0];
                 messageTexts.RemoveAt(0);
                 Destroy(removedMessage.gameObject);
             }
 
             Canvas.ForceUpdateCanvases();
+
+            contentPanel.gameObject.GetComponent<VerticalLayoutGroup>().enabled = false;
+                        contentPanel.gameObject.GetComponent<VerticalLayoutGroup>().enabled = true;
+
+
             scrollRect.verticalNormalizedPosition = 0f;
         }
     }
@@ -105,22 +151,32 @@ public class specificChat : MonoBehaviour
             // frienRequestCame = FriendRequestManager.instance.friendRequestPanel;
         }
 
-        string senderColor = "<color=green>";
-        string messageColor = "<color=white>";
-        string receiverColor = "<color=blue>";
+       
 
-        string senderInfo = messageResult.Publisher;
         string message = messageResult.Message.ToString();
+
+
+
+
+        string[] messageParts = message.Split(':');
+
+        // Check if the split was successful and get the sender name
+        string senderName = (messageParts.Length > 0) ? messageParts[0].Trim() : "Unknown Sender";
+
+        string senderInfo = senderName;
+
+        string messageContent = (messageParts.Length > 1) ? message.Substring(messageParts[0].Length + 1).Trim() : message;
+
         string localPlayerIdentifier = AppManager.instance.Get_PlayerData().name.ToString();
         bool isLocalPlayerMessage = senderInfo.Equals(localPlayerIdentifier);
 
         if (isLocalPlayerMessage)
         {
-            DisplayMessage($"{senderColor}{senderInfo}:</color> {messageColor}{message}</color>\n");
+            DisplayMessage($"{senderInfo}: {messageContent}\n");
         }
         else
         {
-            DisplayMessage($"{receiverColor}{senderInfo}:</color> {messageColor}{message}</color>\n");
+            DisplayMessage($"{senderInfo}: {messageContent}\n");
         }
 
 
@@ -139,47 +195,51 @@ public class specificChat : MonoBehaviour
             roomNameToJoin = extractedString;
 
         }
-        string extractedString1 = ExtractStringBetweenBrackets(message, "[", "]");
 
-        // Map extracted string to corresponding GAME_TYPE enum
-        if (Enum.TryParse(extractedString1, out GAME_TYPE gameType))
+        if (message.Contains("battle_datas"))
         {
-            AppManager.instance.Set_BattleType(gameType);
+            string extractedString1 = ExtractStringBetweenBrackets(message, "[", "]");
+
+            // Map extracted string to corresponding GAME_TYPE enum
+            if (Enum.TryParse(extractedString1, out GAME_TYPE gameType))
+            {
+                AppManager.instance.Set_BattleType(gameType);
+            }
+
+            string extractedAmountString2 = ExtractStringBetweenBrackets(message, "{", "}");
+
+            if (int.TryParse(extractedAmountString2, out int parsedAmount))
+            {
+                AppManager.instance.battleSetting.amount = parsedAmount;
+            }
+
+            string extractedAmountString3 = ExtractStringBetweenBrackets(message, "^", "*");
+
+            if (int.TryParse(extractedAmountString3, out int parsedAmount1))
+            {
+                AppManager.instance.Set_BattleMaxPlayer(parsedAmount1);
+            }
+
+            string extractedAmountString4 = ExtractStringBetweenBrackets(message, "!", "@");
+
+
+
+
+            // if (int.TryParse(extractedAmountString4, out int parsedAmount2))
+            // {
+            //     AppManager.instance.Set_DeductFrom(0);
+
+            //     if (AppManager.instance.Get_BattleSettings().amount > ApiManager.instance.responce_userdata.MainWallet)
+            //     {
+
+            //     }
+            //     else
+            //     {
+
+            //     }
+            // }
+
         }
-
-        string extractedAmountString2 = ExtractStringBetweenBrackets(message, "{", "}");
-
-        if (int.TryParse(extractedAmountString2, out int parsedAmount))
-        {
-            AppManager.instance.battleSetting.amount = parsedAmount;
-        }
-
-        string extractedAmountString3 = ExtractStringBetweenBrackets(message, "^", "*");
-
-        if (int.TryParse(extractedAmountString3, out int parsedAmount1))
-        {
-            AppManager.instance.Set_BattleMaxPlayer(parsedAmount1);
-        }
-
-        string extractedAmountString4 = ExtractStringBetweenBrackets(message, "!", "@");
-
-
-
-
-        // if (int.TryParse(extractedAmountString4, out int parsedAmount2))
-        // {
-        //     AppManager.instance.Set_DeductFrom(0);
-
-        //     if (AppManager.instance.Get_BattleSettings().amount > ApiManager.instance.responce_userdata.MainWallet)
-        //     {
-
-        //     }
-        //     else
-        //     {
-
-        //     }
-        // }
-
     }
 
 
@@ -194,7 +254,7 @@ public class specificChat : MonoBehaviour
         Debug.Log("SendMessageToRoom");
         if (!string.IsNullOrEmpty(message))
         {
-            string playerName = "";
+            string playerName = AppManager.instance.Get_PlayerData().name;
             string fullMessage = $"{playerName}: {message}";
 
             pubnub.Publish()
@@ -247,5 +307,115 @@ public class specificChat : MonoBehaviour
         }
         return "";
     }
+
+    int i = 0;
+    int k = 0;
+    public string[] oldMessages;
+
+
+    void showOldChat()
+    {
+        if (oldMessages.Length > k)
+        {
+            if (!string.IsNullOrEmpty(oldMessages[k]))
+            {
+                DisplayOldMessages(oldMessages[k]);
+                k++;
+            }
+        }
+    }
+
+    void RetrieveOldMessages(string channelName)
+    {
+
+
+        pubnub.FetchHistory()
+            .Channels(new string[] { channelName })
+            .MaximumPerChannel(25)
+            .End(15343325004275466)
+            .Execute(new PNFetchHistoryResultExt((result, status) =>
+            {
+                if (!status.Error)
+                {
+                    foreach (KeyValuePair<string, List<PNHistoryItemResult>> channelMessages in result.Messages)
+                    {
+                        List<PNHistoryItemResult> messages = channelMessages.Value;
+
+                        foreach (PNHistoryItemResult message in messages)
+                        {
+                            // Now you can access individual messages within each channel
+                            Debug.Log($"{message.Entry}");
+
+
+                            oldMessages[i] = message.Entry.ToString();
+                            i++;
+
+                            // DisplayOldMessages($"{message.Entry}");
+
+
+
+                            // Add a delay of 1 second (adjust as needed)
+
+                        }
+
+                    }
+                }
+                else
+                {
+                    Debug.LogError("History request failed: " + status.Error);
+                }
+            }));
+
+        InvokeRepeating("showOldChat", 0f, 0.05f);
+    }
+
+
+
+    void DisplayOldMessages(string messageMM)
+    {
+        string senderColor = "<color=green>";
+        string messageColor = "<color=white>";
+        string receiverColor = "<color=blue>";
+
+
+
+
+
+
+        string[] messageParts = messageMM.Split(':');
+
+        // Check if the split was successful and get the sender name
+        string senderName = (messageParts.Length > 0) ? messageParts[0].Trim() : "Unknown Sender";
+
+        string senderInfo = senderName;
+
+        string messageContent = (messageParts.Length > 1) ? messageMM.Substring(messageParts[0].Length + 1).Trim() : messageMM;
+
+        string localPlayerIdentifier = AppManager.instance.Get_PlayerData().name.ToString();
+        bool isLocalPlayerMessage = senderInfo.Equals(localPlayerIdentifier);
+
+        if (isLocalPlayerMessage)
+        {
+            DisplayMessage($"{senderInfo}: {messageContent}\n");
+        }
+        else
+        {
+            DisplayMessage($"{senderInfo}: {messageContent}\n");
+        }
+
+
+    }
+
+
+    public void ClearChat()
+    {
+        foreach (TMP_Text messageText in messageTexts)
+        {
+            Destroy(messageText.gameObject);
+        }
+
+        messageTexts.Clear();
+    }
+
 
 }

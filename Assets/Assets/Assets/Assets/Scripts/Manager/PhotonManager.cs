@@ -83,10 +83,11 @@ namespace Cashbaazi.App.Common
             if (specificChat.instance.isRequestedFromPrivateRoom)
             {
                 PhotonNetwork.JoinRoom(privateRoomNameToJoin);
+                return;
+
             }
 
 
-            return;
 
 
             if (!specificChat.instance.isPrivateRoomNeed)
@@ -137,12 +138,13 @@ namespace Cashbaazi.App.Common
             // Create a private room
             PhotonNetwork.CreateRoom(AppManager.instance.Get_PlayerData().name, roomOptions, null);
             specificChat.instance.messageInput.text = "battle_request_from " + "[" + AppManager.instance.Get_PlayerData().name + "]";
-            specificChat.instance.SendMessageToRoom("battle_request_from " + "["+ AppManager.instance.Get_PlayerData().name + "]");
+            specificChat.instance.SendMessageToRoom("battle_request_from " + "[" + AppManager.instance.Get_PlayerData().name + "]");
+            specificChat.instance.messageInput.text = "battle_datas " + "[" + AppManager.instance.Get_BattleSettings().gameType + "]" + "{" + AppManager.instance.Get_BattleSettings().amount + "}" + "^" + AppManager.instance.Get_BattleSettings().maxPlayers + "*" + "!" + AppManager.instance.Get_BattleSettings().deductionWallet + "@";
             specificChat.instance.SendMessageToRoom("battle_datas " + "[" + AppManager.instance.Get_BattleSettings().gameType + "]" + "{" + AppManager.instance.Get_BattleSettings().amount + "}" + "^" + AppManager.instance.Get_BattleSettings().maxPlayers + "*" + "!" + AppManager.instance.Get_BattleSettings().deductionWallet + "@");
-             
 
-             Debug.Log("battle_datas " + "[" + AppManager.instance.Get_BattleSettings().gameType + "]" + "{" + AppManager.instance.Get_BattleSettings().amount + "}" + "^" + AppManager.instance.Get_BattleSettings().maxPlayers + "*" + "!" + AppManager.instance.Get_BattleSettings().deductionWallet + "@");
-      
+
+            Debug.Log("battle_datas " + "[" + AppManager.instance.Get_BattleSettings().gameType + "]" + "{" + AppManager.instance.Get_BattleSettings().amount + "}" + "^" + AppManager.instance.Get_BattleSettings().maxPlayers + "*" + "!" + AppManager.instance.Get_BattleSettings().deductionWallet + "@");
+
         }
 
 
