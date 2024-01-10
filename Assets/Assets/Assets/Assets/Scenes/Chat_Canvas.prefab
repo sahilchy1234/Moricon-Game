@@ -4730,6 +4730,7 @@ GameObject:
   - component: {fileID: 8285566397036794902}
   - component: {fileID: 5948207415745742479}
   - component: {fileID: 2505232704983307701}
+  - component: {fileID: 8987225637056345254}
   m_Layer: 5
   m_Name: Chat_Canvas
   m_TagString: Untagged
@@ -4876,6 +4877,39 @@ MonoBehaviour:
   - 
   - 
   - 
+--- !u!114 &8987225637056345254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7845424635027027436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddbbd49b4829d6b4db199cc18d9ad2f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onlineStatusIMG: {fileID: 4343509974492883643}
+  imageOnlineOffline:
+  - {fileID: 21300000, guid: fa1ca30514857f04589ec5a7b3a5eb2e, type: 3}
+  - {fileID: 21300000, guid: 7871ea4361298be4eb0dd7bd533eff4b, type: 3}
+  opponentImage: {fileID: 8019248849411657196}
+  allAvatars:
+  - {fileID: 21300000, guid: 4794dfbdb6da4ef49bcb16672c8bf15a, type: 3}
+  - {fileID: 21300000, guid: 76a4aee1f2ee21945aea0e89ec6f7f30, type: 3}
+  - {fileID: 21300000, guid: 45aac6628446a4446aad3109cbf4bc4d, type: 3}
+  - {fileID: 21300000, guid: 9841972d04b253946a19dcd8b6c81b00, type: 3}
+  - {fileID: 21300000, guid: bb2eb7923d8214e4eb0547d71beb9863, type: 3}
+  - {fileID: 21300000, guid: 91e877e13d7047d44813a456cb13336e, type: 3}
+  - {fileID: 21300000, guid: 52f79ccbd86ac2d409745ce53ad5a696, type: 3}
+  - {fileID: 21300000, guid: 98aad683c97b6364eb0cea2e5fd028b0, type: 3}
+  - {fileID: 21300000, guid: f1c7933e730529044a724f7f806d2716, type: 3}
+  - {fileID: 21300000, guid: 0565836d1dcf62c4db6206aea36cc518, type: 3}
+  - {fileID: 21300000, guid: 9404539e54a16cd40bdd62bd3fc24530, type: 3}
+  - {fileID: 21300000, guid: a2525ca0b2477f247a928a6007b2534a, type: 3}
+  - {fileID: 21300000, guid: 3a34d58d8d21f2d41a8483fc47e68795, type: 3}
+  - {fileID: 21300000, guid: 3cb4a5bde1079294f96ee84032dbafc3, type: 3}
+  opponentName: {fileID: 5394514199427470007}
 --- !u!1 &7952207544010959771
 GameObject:
   m_ObjectHideFlags: 0

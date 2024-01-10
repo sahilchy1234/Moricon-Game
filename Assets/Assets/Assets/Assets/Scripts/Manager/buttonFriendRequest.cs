@@ -17,6 +17,7 @@ public class buttonFriendRequest : MonoBehaviour
             _script.SendRequestFriendship(i);
         }
 
+        ChatInfoGame.instance.OnFriendButtonClick((FriendRequestManager.instance.playersObject[i].transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text));
         Invoke("StartChat", 2f);
     }
 

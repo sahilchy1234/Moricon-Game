@@ -19,11 +19,21 @@ public class ChatInfoGame : MonoBehaviour
 {
 
 
+    public Image onlineStatusIMG;
+    public Sprite[] imageOnlineOffline;
     public Image opponentImage;
     public Sprite[] allAvatars;
     public Text opponentName;
 
-    
+
+    public static ChatInfoGame instance;
+
+
+    void Start()
+    {
+        instance = this;
+    }
+
 
     public void OnFriendButtonClick(string TitleDisplayName)
     {
@@ -53,7 +63,7 @@ public class ChatInfoGame : MonoBehaviour
                 opponentImage.sprite = allAvatars[avatarIndex];
                 // Now you can use the avatar index to load and display the corresponding avatar
                 // Update the UI or do whatever is necessary with the avatar information
-                Debug.Log($"Loaded Avatar Index for {friend.TitleDisplayName}: {avatarIndex}");
+                // Debug.Log($"Loaded Avatar Index for {friend.TitleDisplayName}: {avatarIndex}");
             }
         }, error =>
         {
@@ -86,7 +96,7 @@ public class ChatInfoGame : MonoBehaviour
                     if (isOnline)
                     {
                         // Friend is online, activate requestButton
-                        requestButton.SetActive(true);
+                        // requestButton.SetActive(true);
                         onlineStatusIMG.sprite = imageOnlineOffline[1];
                         onlineStatusIMG.color = Color.white;
 
@@ -95,7 +105,7 @@ public class ChatInfoGame : MonoBehaviour
                     else
                     {
                         // Friend is offline, deactivate requestButton
-                        requestButton.SetActive(false);
+                        // requestButton.SetActive(false);
                         onlineStatusIMG.sprite = imageOnlineOffline[0];
                         onlineStatusIMG.color = new Color(0.5f, 0.5f, 0.5f, 1f); // RGB values (0.5, 0.5, 0.5) represent gray
                     }
