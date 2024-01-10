@@ -5,8 +5,7 @@ using PlayFab.ClientModels;
 
 public class FriendRequestManager : MonoBehaviour
 {
-    public GameObject friendRequestPanel;
-    public Text nameTEXT;
+ 
     public static FriendRequestManager instance;
 
     /// <summary>

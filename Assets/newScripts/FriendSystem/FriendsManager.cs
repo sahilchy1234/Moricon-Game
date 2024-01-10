@@ -18,6 +18,9 @@ using UnityEngine.UI;
 
 public class FriendsManager : MonoBehaviour
 {
+    public Image onlineStatusIMG;
+    public Sprite[] imageOnlineOffline;
+
     public GameObject requestButton;
     public Text opponentName;
     public Image opponentImage;
@@ -68,13 +71,38 @@ public class FriendsManager : MonoBehaviour
         Button friendButton = buttonGO.GetComponent<Button>();
 
         // Check if playerProfile is available
-        Text buttonText = friendButton.GetComponentInChildren<Text>();
+        Text buttonText = friendButton.transform.Find("friendName").GetComponent<Text>();
         buttonText.text = friend.TitleDisplayName; // Use the 'Username' property of PlayerProfile
 
         buttonGO.name = friend.TitleDisplayName;
 
         // Load avatar index (assuming it's stored as "AvatarIndex" in player's data)
-        Debug.Log("Loading Avatar");
+
+        // Log keys outside the callback
+
+
+        // PlayFabClientAPI.GetUserData(new GetUserDataRequest(), OnDataReceived, OnError);
+
+
+
+        PlayFabClientAPI.GetUserData(new GetUserDataRequest
+        {
+            Keys = new List<string> { friend.TitleDisplayName }
+        }, result =>
+        {
+            if (result.Data.TryGetValue(friend.TitleDisplayName, out UserDataRecord userData))
+            {
+                int index = int.Parse(userData.Value);
+
+                PlayerPrefs.SetInt(friend.TitleDisplayName, index);
+            }
+        }, error =>
+        {
+            Debug.LogError("Failed to get user data: " + error.ErrorMessage);
+        });
+
+
+
         PlayFabClientAPI.GetUserData(new GetUserDataRequest
         {
             PlayFabId = friend.FriendPlayFabId,
@@ -84,7 +112,11 @@ public class FriendsManager : MonoBehaviour
             if (result.Data.TryGetValue("AvatarIndex", out UserDataRecord userData))
             {
                 int avatarIndex = int.Parse(userData.Value);
-                avatarIndexM = avatarIndex;
+                // Now you can use the avatar index to load and display the corresponding avatar
+                // Update the UI or do whatever is necessary with the avatar information
+
+                Image avatarImage = friendButton.transform.Find("avatarImage").GetComponent<Image>();
+                avatarImage.sprite = allAvatars[avatarIndex];
                 // Now you can use the avatar index to load and display the corresponding avatar
                 // Update the UI or do whatever is necessary with the avatar information
                 Debug.Log($"Loaded Avatar Index for {friend.TitleDisplayName}: {avatarIndex}");
@@ -94,8 +126,9 @@ public class FriendsManager : MonoBehaviour
             Debug.LogError("Failed to get user data: " + error.ErrorMessage);
         });
 
-        Image avatarImage = friendButton.transform.Find("avatarImage").GetComponent<Image>();
-        avatarImage.sprite = allAvatars[avatarIndexM+1];
+
+
+
 
         Image onlineStatusImage = buttonGO.transform.Find("OnlineStatusImage").GetComponent<Image>();
 
@@ -105,6 +138,9 @@ public class FriendsManager : MonoBehaviour
         friendButton.onClick.AddListener(() => OnFriendButtonClick(friend));
     }
 
+
+
+
     void OnFriendButtonClick(FriendInfo friend)
     {
         Debug.Log("Button clicked for friend: " + friend.TitleDisplayName);
@@ -113,7 +149,7 @@ public class FriendsManager : MonoBehaviour
         opponentName.text = friend.TitleDisplayName;
 
         // Load avatar index (assuming it's stored as "AvatarIndex" in player's data)
-       
+
 
 
 
@@ -171,12 +207,17 @@ public class FriendsManager : MonoBehaviour
                     {
                         // Friend is online, activate requestButton
                         requestButton.SetActive(true);
+                        onlineStatusIMG.sprite = imageOnlineOffline[1];
+                        onlineStatusIMG.color = Color.white;
+
 
                     }
                     else
                     {
                         // Friend is offline, deactivate requestButton
                         requestButton.SetActive(false);
+                        onlineStatusIMG.sprite = imageOnlineOffline[0];
+                        onlineStatusIMG.color = new Color(0.5f, 0.5f, 0.5f, 1f); // RGB values (0.5, 0.5, 0.5) represent gray
                     }
                 }
             }, error =>

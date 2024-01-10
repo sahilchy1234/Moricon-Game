@@ -73,19 +73,22 @@ public class PlayfabManager : MonoBehaviour
 
         FriendsManager.instance.LoadFriendsList();
 
+        Playfab_Leaderboard.instance.SendLeaderboard(PlayerPrefs.GetInt("Main_Score",0));
+
         SaveOnlineStatus(true);
     }
 
 
-    private void OnApplicationFocus(bool focusStatus)
+       private void OnApplicationFocus(bool focusStatus)
     {
-        SaveOnlineStatus(false);
+        SaveOnlineStatus(!focusStatus);
     }
+
     private void OnApplicationQuit()
     {
         SaveOnlineStatus(false);
     }
-
+    
     void OnError(PlayFabError error)
     {
         Debug.Log("Error Login");
@@ -100,7 +103,9 @@ public class PlayfabManager : MonoBehaviour
         {
             Data = new Dictionary<string, string>{
               {game_name, game_data}
-            }
+            },
+
+            Permission = UserDataPermission.Public
         };
         PlayFabClientAPI.UpdateUserData(request, OnDataSend, OnError);
     }
@@ -137,6 +142,23 @@ public class PlayfabManager : MonoBehaviour
                 FruitNinjadata = result.Data["FruitNijaGameData"].Value;
             }
         }
+        if (result.Data.ContainsKey("Main_Score"))
+        {
+            // FruitNinjadata = result.Data["FruitNijaGameData"].Value;
+            string stringValue = result.Data["Main_Score"].Value;
+            int intValue;
+
+            if (int.TryParse(stringValue, out intValue))
+            {
+                PlayerPrefs.SetInt("Main_Score", intValue);
+            }
+            else
+            {
+                Debug.LogError("Failed to parse Main_Score value as an integer.");
+            }
+
+        }
+
     }
 
     public void BottleGameSaveFunction(string data)
@@ -176,7 +198,8 @@ public class PlayfabManager : MonoBehaviour
             {
                 { "LastOnline", DateTime.UtcNow.ToString() },
                 { "IsOnline", isOnline.ToString() } // Save the online status
-            }
+            },
+            Permission = UserDataPermission.Public
         };
         PlayFabClientAPI.UpdateUserData(request, OnDataSend, OnError);
     }

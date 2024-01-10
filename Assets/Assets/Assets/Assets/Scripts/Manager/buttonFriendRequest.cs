@@ -12,7 +12,10 @@ public class buttonFriendRequest : MonoBehaviour
 
     public void SendRequest()
     {
-        _script.SendRequestFriendship(i);
+        if (!PlayerPrefs.HasKey(FriendRequestManager.instance.playersObject[i].transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text))
+        {
+            _script.SendRequestFriendship(i);
+        }
 
         Invoke("StartChat", 2f);
     }

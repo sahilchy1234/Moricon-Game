@@ -23,8 +23,11 @@ namespace Cashbaazi.App.Screen
     {
 
 
+        public GameObject winObject, lossObject;
+        [Space(20)]
 
- private List<string> friendNames = new List<string>();
+
+        private List<string> friendNames = new List<string>();
         public GameObject[] fourButtons;
 
 
@@ -57,73 +60,15 @@ namespace Cashbaazi.App.Screen
             Btn_Menu.onClick.AddListener(OnClick_Menu);
             ReportFraud.onClick.AddListener(OnClickReportBtn);
 
-
-             InvokeRepeating("GetFriendList", 1f, 3f);
-            //  Btn_PlayAgain.onClick.AddListener(OnClick_PlayAgain);
         }
 
 
-        // private string friendPlayFabId = "";
 
 
 
 
 
-
-
-
-
-       
-
-    
-
-        private void GetFriendList()
-        {
-            // Set up the request to get the user's friend list
-       
-        // Set up the request to get the user's friend list
-        var request = new GetFriendsListRequest
-        {
-            
-            XboxToken = null
-        };
-
-        // Call the PlayFab API to get the friend list
-        PlayFabClientAPI.GetFriendsList(request, OnGetFriendsListSuccess, OnPlayFabError);
-
-
-            // Call the PlayFab API to get the friend list
-            // PlayFabClientAPI.GetFriendsList(request, OnGetFriendsListSuccess, OnPlayFabError);
-
-
-            for(int i = 0; i < friendNames.Count; i++) {
-                if(friendNames[i] ==  allPlayers[i].ThisPlayer.NickName){
-                    //   fourButtons[i].SetActive(false);
-                }
-            }
-        }
-
-        private void OnGetFriendsListSuccess(GetFriendsListResult result)
-        {
-            // Clear the list before populating it to avoid duplicates
-            friendNames.Clear();
-
-            // Populate the friendNames list with the names of friends
-            foreach (var friend in result.Friends)
-            {
-                friendNames.Add(friend.TitleDisplayName);
-            }
-
-            // Now friendNames contains the names of friends
-            // You can access the list as needed, for example, log it to the console
-            Debug.Log("Friend Names: " + string.Join(", ", friendNames.ToArray()));
-        }
-
-        private void OnPlayFabError(PlayFabError error)
-        {
-            Debug.LogError("PlayFab Error: " + error.ErrorMessage);
-        }
-
+   
 
         public override void Show()
         {
@@ -147,8 +92,11 @@ namespace Cashbaazi.App.Screen
                         String.Format("<color=red>Rs.-{0}</color>", AppManager.instance.Get_BattleSettings().amount);
                     player1.transform.GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>().text = allPlayers[i].ThisPlayerScore.ToString();
 
+                    if (player1.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text == AppManager.instance.Get_PlayerData().name)
+                    {
+                        fourButtons[0].SetActive(false);
+                    }
 
-              
 
                 }
                 else if (!player2.activeInHierarchy)
@@ -167,6 +115,10 @@ namespace Cashbaazi.App.Screen
 
 
 
+                    if (player2.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text == AppManager.instance.Get_PlayerData().name)
+                    {
+                        fourButtons[1].SetActive(false);
+                    }
 
 
                 }
@@ -186,6 +138,10 @@ namespace Cashbaazi.App.Screen
 
 
 
+                    if (player3.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text == AppManager.instance.Get_PlayerData().name)
+                    {
+                        fourButtons[2].SetActive(false);
+                    }
 
 
 
@@ -212,6 +168,10 @@ namespace Cashbaazi.App.Screen
 
 
 
+                    if (player4.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text == AppManager.instance.Get_PlayerData().name)
+                    {
+                        fourButtons[3].SetActive(false);
+                    }
 
 
 
@@ -405,12 +365,24 @@ namespace Cashbaazi.App.Screen
                 ApiManager.instance.API_AddWallet("Game Winning Amount", AppManager.instance.Get_GameWinningAmount(),
                     () =>
                     {
+                        int score = PlayerPrefs.GetInt("Main_Score");
+                        score += (int)AppManager.instance.Get_GameWinningAmount(); // Explicitly cast to int
+                        PlayerPrefs.SetInt("Main_Score", score);
+                        PlayfabManager.instance.SaveData("Main_Score", score.ToString());
+
+                        winObject.SetActive(true);
+                        lossObject.SetActive(false);
                         Toast.ShowToast("Winning amount added! ENJOY");
                     },
                     () =>
                     {
                         UpdateWinnerWallet();
                     });
+            }
+            else
+            {
+                winObject.SetActive(false);
+                lossObject.SetActive(true);
             }
         }
 

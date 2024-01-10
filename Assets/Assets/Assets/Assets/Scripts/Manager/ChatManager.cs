@@ -11,6 +11,8 @@ using Cashbaazi.App.Helper;
 using Cashbaazi.App.Manager;
 using TMPro;
 using UnityEngine.SceneManagement;
+using PlayFab;
+using PlayFab.ClientModels;
 
 public class ChatManager : MonoBehaviourPun
 {
@@ -154,6 +156,7 @@ public class ChatManager : MonoBehaviourPun
 
                 PlayerPrefs.SetString(requestePlayerName, extractedString2);
                 Debug.Log(requestePlayerName + " " + extractedString2);
+                PlayfabManager.instance.SaveData(requestePlayerName, extractedString2);
                 AcceptFriendRequest();
 
                 Debug.Log("subscribing to channel with intiazier name" + requestePlayerName);
@@ -187,12 +190,43 @@ public class ChatManager : MonoBehaviourPun
         messageInput.text = $"friend_request_to [{AppManager.instance.Get_PlayerData().name}]{{{FriendRequestManager.instance.playersObject[i].transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text}}}xzc" + randomNumber + "xcx";
         SendMessageToRoom($"friend_request_to [{AppManager.instance.Get_PlayerData().name}]{{{FriendRequestManager.instance.playersObject[i].transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text}}}xzc" + randomNumber + "xcx");
         PlayerPrefs.SetString(FriendRequestManager.instance.playersObject[i].transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text, randomNumber.ToString());
+        PlayfabManager.instance.SaveData(FriendRequestManager.instance.playersObject[i].transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text, randomNumber.ToString());
 
-        FriendRequestManager.instance.SendFriendRequest(FriendRequestManager.instance.playersObject[i].transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text);
+        SendFriendRequest(FriendRequestManager.instance.playersObject[i].transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text);
     }
 
     public void AcceptFriendRequest()
     {
-        FriendRequestManager.instance.SendFriendRequest(requestePlayerName);
+        SendFriendRequest(requestePlayerName);
+    }
+
+
+
+
+    public void SendFriendRequest(string name)
+    {
+        string friendUsername = name;
+
+        if (string.IsNullOrEmpty(friendUsername))
+        {
+            Debug.LogWarning("Please enter a friend's username.");
+            return;
+        }
+
+        PlayFabClientAPI.AddFriend(new AddFriendRequest
+        {
+            FriendTitleDisplayName = friendUsername,
+        }, OnSendFriendRequestSuccess, OnSendFriendRequestFailure);
+    }
+
+    void OnSendFriendRequestSuccess(AddFriendResult result)
+    {
+        Debug.Log("Friend request sent successfully");
+        // InitializeFriendRequests();
+    }
+
+    void OnSendFriendRequestFailure(PlayFabError error)
+    {
+        Debug.LogError("Failed to send friend request: " + error.ErrorMessage);
     }
 }
